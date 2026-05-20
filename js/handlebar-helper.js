@@ -1,25 +1,28 @@
 // handlebar Helper
-window.handlebarHelper = (function () {
-    // INIT
-    function init() {
-        HandlebarsIntl.registerWith(Handlebars);
-        Handlebars.registerHelper('replace', replaceHelper);
-    }
+// INIT
+function init() {
+    HandlebarsIntl.registerWith(Handlebars);
+    Handlebars.registerHelper('replace', replaceHelper);
+}
 
-    function replaceHelper(string, replace, replacement) {
-        return (string || '').replace(replace, replacement);
-    }
+function replaceHelper(string, replace, replacement) {
+    return (string || '').replace(replace, replacement);
+}
 
-    function getTemplates(templates) {
-        jQuery.each(templates, function(i, instance) {
-            jQuery.get(instance.source, function (data) {
+function getTemplates(templates) {
+    Object.entries(templates).forEach(([key, instance]) => {
+        fetch(instance.source)
+            .then(response => response.text())
+            .then(data => {
                 instance.template = Handlebars.compile(data);
-            }, 'html')
-        });
-    }
+            })
+            .catch(err => console.error("Error loading template " + instance.source, err));
+    });
+}
 
-    return {
-        init: init,
-        getTemplates: getTemplates
-    };
-})();
+const handlebarHelper = {
+    init: init,
+    getTemplates: getTemplates
+};
+
+export default handlebarHelper;

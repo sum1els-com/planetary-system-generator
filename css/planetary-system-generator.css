@@ -1,73 +1,501 @@
+/* Import LCARS Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Antonio:wght@400;700&family=Roboto+Condensed:wght@400;700&display=swap');
+
+:root {
+    --lcars-orange: #ff9900;
+    --lcars-apricot: #ff9966;
+    --lcars-yellow: #ffcc00;
+    --lcars-gold: #ffcc66;
+    --lcars-blue: #99ccff;
+    --lcars-lavender: #cc99cc;
+    --lcars-pink: #ff99cc;
+    --lcars-cyan: #33ccff;
+    --lcars-red: #ff3333;
+
+    --lcars-bg: #000000;
+    --lcars-panel-bg: rgba(20, 20, 30, 0.7);
+    --lcars-active-bg: rgba(255, 153, 0, 0.2);
+}
+
 body {
-    background-image: url(../image/background/nebula006.png);
+    background: var(--lcars-bg) !important;
+    color: #e0e0ff !important;
+    font-family: 'Roboto Condensed', sans-serif !important;
+    margin: 0;
+    padding: 20px 40px 40px 40px;
 }
 
-body > div.header > h3.header {
-    margin: 20px 20px 20px 20px;
+/* Custom LCARS Frame Elbows and Brackets */
+div.header {
+    background: transparent !important;
+    border-bottom: 6px solid var(--lcars-yellow) !important;
+    padding: 15px 0 10px 0 !important;
+    margin: 0 40px 20px 80px !important;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-body > div.header > h3 > a {
-    float: right;
+div.header::before {
+    content: "";
+    position: absolute;
+    left: -80px;
+    top: 0;
+    width: 60px;
+    height: 100%;
+    background-color: var(--lcars-yellow);
+    border-radius: 30px 0 0 0;
 }
 
-body > div.header > h3 > a.roll-button {
-    margin-right: 20px;
+div.header h3.header-title {
+    margin: 0 !important;
+    font-family: 'Antonio', sans-serif !important;
+    text-transform: uppercase;
+    font-weight: bold !important;
+    color: var(--lcars-blue) !important;
+    font-size: 2.2rem !important;
+    letter-spacing: 1px;
 }
 
-/* Class Styles */
-.hidden { display: none; }
-.bold { font-weight: bold; }
-.italic { font-style: italic; }
-.float-right { float: right; }
-.cursor-pointer { cursor: pointer; }
-
-div.instructions > p,
-div.site-info > p,
-div.acknowledgements > p,
-div.disclaimer > p {
-    margin: 0px 6px 0px 6px
+.header-buttons {
+    display: flex;
+    gap: 12px;
+    align-items: center;
 }
 
-div.container.site-info {
-    margin-top: 60px;
+a.home-button {
+    background-color: var(--lcars-blue) !important;
 }
 
-div#saveModal > div.modal-content,
-div#saveModal > div.modal-content > div.row,
-div#saveModal > div.modal-content > div.row > div.input-field {
-    margin-bottom: 0px;
-    padding-bottom: 0px;
+a.home-button:hover {
+    background-color: var(--lcars-cyan) !important;
 }
 
-div#saveModal textarea { height: 120px; }
+/* LCARS Button Pill Styles */
+a.btn,
+a.btn-floating,
+a.btn-flat,
+.btn-floating.roll-button,
+.dropdown-trigger {
+    font-family: 'Antonio', sans-serif !important;
+    text-transform: uppercase !important;
+    font-weight: bold !important;
+    border-radius: 100px !important;
+    height: 36px !important;
+    line-height: 36px !important;
+    padding: 0 20px !important;
+    box-shadow: none !important;
+    border: none !important;
+    transition: all 0.2s ease-in-out !important;
+    color: #000 !important;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+}
 
-/* Info */
-div.info-container { margin: 20px 40px 20px 40px; }
-div.info-container div.tab-contents { padding: 20px 20px 20px 20px; }
-div.info-container div.tab-contents div.row { margin-bottom: 5px; }
+/* Primary buttons in orange, blue, yellow */
+a.dropdown-trigger {
+    background-color: var(--lcars-lavender) !important;
+}
 
-/* Tab Color */
-div.info-container ul.tabs > li.tab a { color: #FFF; }
-div.info-container ul.tabs > li.tab a.active { color: #FFF; }
-div.info-container ul.tabs > li.tab a:hover { color: #FFF; }
-div.info-container ul.tabs > li.tab a:focus { background-color: rgba(255, 255, 255, 0.1); }
-div.info-container ul.tabs > li.tab a:focus.active { background-color: rgba(255, 255, 255, 0.1); }
-div.info-container ul.tabs .indicator  { background-color: #FFF; }
+a.dropdown-trigger:hover {
+    background-color: var(--lcars-pink) !important;
+}
 
-div.info-container > div.tab-contents {
-    background-color: rgba(255, 255, 255, 0.8);
-    margin: 0px 0px 0px 11px !important;
+.btn-floating.roll-button {
+    background-color: var(--lcars-orange) !important;
+    width: auto !important;
+}
+
+.btn-floating.roll-button:hover {
+    background-color: var(--lcars-apricot) !important;
+}
+
+/* Material Icons size inside LCARS pills */
+a.btn i,
+a.btn-floating i {
+    font-size: 1.3rem !important;
+    margin-right: 8px !important;
+}
+
+/* Disabled styling matching LCARS grey buttons */
+a.disabled,
+a.btn-floating.disabled,
+a.dropdown-trigger.disabled {
+    background-color: #555555 !important;
+    color: #888888 !important;
+    pointer-events: none;
+}
+
+/* Main menus */
+.dropdown-content {
+    background-color: #111 !important;
+    border: 2px solid var(--lcars-lavender) !important;
+    border-radius: 10px !important;
+}
+
+.dropdown-content li {
+    min-height: 40px !important;
+}
+
+.dropdown-content li>a {
+    color: var(--lcars-lavender) !important;
+    font-family: 'Antonio', sans-serif !important;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 10px 16px !important;
+}
+
+.dropdown-content li>a:hover {
+    background-color: rgba(204, 153, 204, 0.2) !important;
+    color: #fff !important;
+}
+
+/* Instructions Banner */
+div.instructions {
+    background-color: var(--lcars-panel-bg) !important;
+    border-left: 6px solid var(--lcars-blue) !important;
+    border-radius: 0 15px 15px 0 !important;
+    padding: 15px 25px !important;
+    margin: 10px 40px 30px 80px !important;
+    position: relative;
+}
+
+div.instructions::before {
+    content: "INFO-01";
+    position: absolute;
+    left: -70px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Antonio', sans-serif;
+    color: var(--lcars-blue);
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+/* Star field visualization frame */
+div.visualization-container {
+    margin: 0 40px 30px 80px !important;
+    border: 2px solid var(--lcars-blue) !important;
+    border-radius: 15px !important;
+    padding: 15px !important;
+    background-color: #050508 !important;
+    box-shadow: 0 0 15px rgba(153, 204, 255, 0.1) !important;
+}
+
+div.visualization-container nav {
+    background-color: transparent !important;
+    border-bottom: 2px solid rgba(153, 204, 255, 0.2) !important;
+    box-shadow: none !important;
+}
+
+.breadcrumb {
+    font-family: 'Antonio', sans-serif !important;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: var(--lcars-cyan) !important;
+}
+
+.breadcrumb::before {
+    color: var(--lcars-cyan) !important;
+}
+
+/* Info container / readout tabs */
+body>div.info-container {
+    margin: 0 40px 20px 80px !important;
+}
+
+.tab-contents .info-container {
+    margin: 0 !important;
+}
+
+.tab-contents .info-container .col {
+    padding-left: 0px !important;
+}
+
+div.info-container ul.tabs {
+    background-color: transparent !important;
+    border-bottom: 4px solid var(--lcars-orange) !important;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    height: 40px !important;
+    margin: 0 0 -4px 0 !important;
+    padding: 0 !important;
+}
+
+div.info-container ul.tabs>li.tab {
+    margin: 0 6px 0 0 !important;
+    padding: 0 !important;
+    height: 40px !important;
+    min-width: 110px !important;
+    float: none !important;
+}
+
+div.info-container ul.tabs>li.tab a {
+    font-family: 'Antonio', sans-serif !important;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #000 !important;
+    background-color: #444 !important;
+    /* Inactive LCARS state */
+    border-radius: 12px 12px 0 0 !important;
+    padding: 0 16px !important;
+    line-height: 40px !important;
+    display: block !important;
+    height: 100% !important;
+    margin: 0 !important;
+    border: none !important;
+    box-sizing: border-box !important;
+    transition: all 0.25s ease !important;
+}
+
+div.info-container ul.tabs>li.tab:nth-child(1) a.active {
+    background-color: var(--lcars-blue) !important;
+}
+
+div.info-container ul.tabs>li.tab:nth-child(1) a:not(.active) {
+    background-color: rgba(153, 204, 255, 0.4) !important;
+    color: #fff !important;
+}
+
+div.info-container ul.tabs>li.tab:nth-child(2) a.active {
+    background-color: var(--lcars-yellow) !important;
+}
+
+div.info-container ul.tabs>li.tab:nth-child(2) a:not(.active) {
+    background-color: rgba(255, 204, 0, 0.4) !important;
+    color: #fff !important;
+}
+
+div.info-container ul.tabs>li.tab:nth-child(3) a.active {
+    background-color: var(--lcars-orange) !important;
+}
+
+div.info-container ul.tabs>li.tab:nth-child(3) a:not(.active) {
+    background-color: rgba(255, 153, 0, 0.4) !important;
+    color: #fff !important;
+}
+
+div.info-container ul.tabs>li.tab:nth-child(4) a.active {
+    background-color: var(--lcars-lavender) !important;
+}
+
+div.info-container ul.tabs>li.tab:nth-child(4) a:not(.active) {
+    background-color: rgba(204, 153, 204, 0.4) !important;
+    color: #fff !important;
+}
+
+div.info-container ul.tabs>li.tab:nth-child(5) a.active {
+    background-color: var(--lcars-pink) !important;
+}
+
+div.info-container ul.tabs>li.tab:nth-child(5) a:not(.active) {
+    background-color: rgba(255, 153, 204, 0.4) !important;
+    color: #fff !important;
+}
+
+div.info-container ul.tabs>li.tab:nth-child(6) a.active {
+    background-color: var(--lcars-apricot) !important;
+}
+
+div.info-container ul.tabs>li.tab:nth-child(6) a:not(.active) {
+    background-color: rgba(255, 153, 102, 0.4) !important;
+    color: #fff !important;
+}
+
+div.info-container ul.tabs .indicator {
+    display: none !important;
+    /* Hide standard underline */
+}
+
+/* Custom Tab Content glass panel */
+div.info-container>div.tab-contents {
+    background-color: var(--lcars-panel-bg) !important;
+    border: 2px solid var(--lcars-blue) !important;
+    border-radius: 0 0 15px 15px !important;
+    color: #e0e0ff !important;
+    padding: 20px !important;
+    margin: 0 !important;
+    box-shadow: inset 0 0 20px rgba(153, 204, 255, 0.05);
+}
+
+/* Remove margins between headers and detailed content */
+div.info-container>div.tab-contents h5 {
+    margin: 0 0 15px 0 !important;
+    font-family: 'Antonio', sans-serif !important;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: var(--lcars-orange) !important;
+    font-size: 1.6rem !important;
+}
+
+div.info-container>div.tab-contents div.row {
+    margin-top: 0 !important;
+    margin-bottom: 4px !important;
+}
+
+div.info-container>div.tab-contents div.row:last-child {
+    margin-bottom: 0 !important;
+}
+
+/* Data Tables */
+table.highlight {
+    border-collapse: separate;
+    border-spacing: 0 4px;
+}
+
+table.highlight th {
+    color: var(--lcars-orange) !important;
+    font-family: 'Antonio', sans-serif !important;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1.1rem;
+    border-bottom: 2px solid var(--lcars-blue) !important;
+    padding: 10px !important;
+}
+
+table.highlight td {
+    color: #e0e0ff !important;
+    border-bottom: 1px solid rgba(153, 204, 255, 0.1) !important;
+    padding: 10px !important;
+}
+
+table.highlight tbody tr:hover {
+    background-color: var(--lcars-active-bg) !important;
+}
+
+/* Ensure high contrast for zone background cells */
+table td.red,
+table td.yellow,
+table td.green,
+table td.blue,
+table td.grey {
+    color: #000000 !important;
+}
+
+.object-link {
+    color: var(--lcars-cyan) !important;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.object-link:hover {
+    color: var(--lcars-orange) !important;
+    text-decoration: underline;
+}
+
+/* Ensure links in zone cells are dark for readability */
+table td.red .object-link,
+table td.yellow .object-link,
+table td.green .object-link,
+table td.blue .object-link,
+table td.grey .object-link {
+    color: #000000 !important;
+}
+
+table td.red .object-link:hover,
+table td.yellow .object-link:hover,
+table td.green .object-link:hover,
+table td.blue .object-link:hover,
+table td.grey .object-link:hover {
+    color: #424242 !important;
+}
+
+/* Formatted Labels (LCARS-style labels) */
+.bold {
+    font-family: 'Antonio', sans-serif !important;
+    text-transform: uppercase;
+    font-weight: bold !important;
+    color: var(--lcars-cyan) !important;
+    font-size: 1.05rem;
+}
+
+/* High-tech custom styled chips */
+.chip {
+    background-color: rgba(153, 204, 255, 0.1) !important;
+    border: 1px solid var(--lcars-blue) !important;
+    color: var(--lcars-blue) !important;
+    font-family: 'Antonio', sans-serif !important;
+    font-weight: bold !important;
+    text-transform: uppercase;
+    border-radius: 100px !important;
+}
+
+/* Star & Planet Visualizations */
+.planet-container {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 20px !important;
+}
+
+#systemVis img.star,
+#systemVis img.planet,
+.stellar-group img,
+.stellar-group .planet-container {
+    vertical-align: middle;
+}
+
+#systemVis img.planet {
+    margin-right: 20px !important;
+}
+
+.planet-container .planet {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    max-width: none !important;
+    max-height: none !important;
+    z-index: 5;
+}
+
+.planet-container .planet-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    max-width: none !important;
+    height: auto;
+    pointer-events: none;
+    z-index: 10;
+}
+
+img.star,
+img.planet {
+    transition: filter 0.3s ease;
+}
+
+/* Pulsing glow animation on hover */
+@keyframes pulseGlow {
+    0% {
+        filter: drop-shadow(0 0 10px rgba(0, 191, 255, 0.5));
+    }
+    50% {
+        filter: drop-shadow(0 0 30px rgba(0, 191, 255, 0.85));
+    }
+    100% {
+        filter: drop-shadow(0 0 10px rgba(0, 191, 255, 0.5));
+    }
+}
+
+img.star:hover,
+img.planet:hover,
+.planet-container:hover img.planet,
+img.star.selected,
+img.planet.selected,
+.planet-container.selected img.planet,
+img.star.glow-effect,
+img.planet.glow-effect,
+.planet-container.glow-effect img.planet {
+    animation: pulseGlow 1.5s infinite ease-in-out;
 }
 
 .image-frame {
-    border: 4px solid #45b;
-    border-radius: 30px;
-    margin-right: 20px;
-}
-
-.image-frame > img {
-    margin: 0px;
-    padding: 20px;
+    border: 4px solid var(--lcars-blue) !important;
+    border-radius: 20px !important;
+    overflow: hidden;
 }
 
 .starfield-bg {
@@ -76,40 +504,223 @@ div.info-container > div.tab-contents {
     background-size: 100%;
 }
 
-/* Visualization */
-div.visualization-container {
-    margin: 0px 40px 20px 40px;
+/* Modal styling */
+.modal {
+    background-color: #0b0b10 !important;
+    border: 3px solid var(--lcars-blue) !important;
+    border-radius: 15px !important;
+    color: #e0e0ff !important;
 }
 
-div.visualization-container nav,
-div.visualization-container div.nav-wrapper {
-    line-height: 2em;
-    height: 2em;
-}
-
-div.visualization-container nav {
-    padding: 0px 4px 0px 4px;
-}
-
-.group-label,
-.star-label,
-.planet-label,
-.view-title {
-    color: white;
+.modal h5 {
+    font-family: 'Antonio', sans-serif !important;
+    text-transform: uppercase;
     font-weight: bold;
+    color: var(--lcars-orange) !important;
 }
 
-.planet-ring {
-    position: absolute;
-    left: -180px;
-    top: 266px;
+.modal textarea {
+    color: #fff !important;
+    border-bottom: 1px solid var(--lcars-blue) !important;
 }
 
+.modal .modal-footer {
+    background-color: transparent !important;
+    border-top: 1px solid rgba(153, 204, 255, 0.1) !important;
+}
+
+.modal .modal-footer a.btn-flat {
+    color: #000 !important;
+    background-color: var(--lcars-yellow) !important;
+}
+
+/* Footer Section */
+div.site-info,
+div.acknowledgements,
+div.disclaimer {
+    margin: 20px 40px 10px 80px !important;
+    background-color: rgba(20, 20, 25, 0.4) !important;
+    border-left: 4px solid #444 !important;
+    padding: 10px 20px !important;
+    border-radius: 0 8px 8px 0 !important;
+}
+
+div.container.site-info {
+    margin-top: 50px !important;
+}
+
+/* Utility Styles */
+.hidden {
+    display: none !important;
+}
+
+.italic {
+    font-style: italic !important;
+}
+
+.float-right {
+    float: right !important;
+}
+
+.cursor-pointer {
+    cursor: pointer !important;
+}
+
+/* JSON Viewer Dark Mode Overrides */
+.json-viewer {
+    color: #e0e0ff !important;
+}
+
+.json-viewer ul {
+    border-left: 1px dotted rgba(255, 255, 255, 0.2) !important;
+}
+
+.json-viewer ul li .type-string,
+.json-viewer ul li .type-date {
+    color: #81c784 !important;
+}
+
+.json-viewer ul li .type-boolean {
+    color: var(--lcars-orange) !important;
+}
+
+.json-viewer ul li .type-number {
+    color: #64b5f6 !important;
+}
+
+.json-viewer ul li .type-null {
+    color: #ff8a80 !important;
+}
+
+.json-viewer a.list-link {
+    color: #ffffff !important;
+}
+
+.json-viewer a.list-link:before {
+    color: var(--lcars-cyan) !important;
+}
+
+.json-viewer .items-ph {
+    color: #b0bec5 !important;
+}
+
+/* Custom Chip Styling for Info Summary */
+#infoSummary .chip {
+    height: auto;
+    line-height: normal;
+    padding: 6px 14px;
+    border-radius: 16px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin: 4px;
+    display: inline-block;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#infoSummary .chip:hover {
+    box-shadow: 0 0 10px rgba(153, 204, 255, 0.5);
+    background-color: rgba(153, 204, 255, 0.25) !important;
+}
+
+#infoSummary .chip.chip-default {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: #e0e0e0 !important;
+}
+
+#infoSummary .chip.chip-default:hover {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+#infoSummary .chip.chip-green {
+    background-color: rgba(76, 175, 80, 0.15) !important;
+    border: 1px solid #4caf50 !important;
+    color: #81c784 !important;
+}
+
+#infoSummary .chip.chip-green:hover {
+    box-shadow: 0 0 10px #4caf50;
+    background-color: rgba(76, 175, 80, 0.3) !important;
+}
+
+#infoSummary .chip.chip-yellow {
+    background-color: rgba(255, 235, 59, 0.15) !important;
+    border: 1px solid #ffeb3b !important;
+    color: #ffe082 !important;
+}
+
+#infoSummary .chip.chip-yellow:hover {
+    box-shadow: 0 0 10px #ffeb3b;
+    background-color: rgba(255, 235, 59, 0.3) !important;
+}
+
+/* Horizontal Parallax Scroll Visualization */
 #systemVis {
-
+    position: relative;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+    width: 100% !important;
+    min-height: 400px;
+    padding: 20px;
+    background-image: url("../image/background/starfield.jpg") !important;
+    background-repeat: repeat-x !important;
+    background-size: cover !important;
+    background-position: 0px 50%;
+    border-radius: 10px;
 }
 
-#systemVis .planet{
-    margin-left: 10px;
-    margin-right: 10px;
+#systemVis h5.planet-label,
+#systemVis h5.star-label {
+    display: block !important;
+    width: 100% !important;
+    white-space: normal !important;
+    margin: 0 0 20px 0 !important;
+}
+
+.stellar-group {
+    display: inline-block !important;
+    vertical-align: middle !important;
+    margin-right: 80px !important;
+    white-space: nowrap !important;
+}
+
+.nav-wrapper {
+    padding-left: 20px !important;
+}
+
+.system-border-container {
+    vertical-align: middle !important;
+    margin: 0 15px !important;
+    display: inline-block !important;
+}
+
+.system-border {
+    display: block !important;
+    filter: drop-shadow(0 0 18px rgba(255, 255, 255, 0.85));
+}
+
+/* LCARS custom tooltips */
+.material-tooltip {
+    background-color: #000000 !important;
+    border: 2px solid var(--lcars-blue) !important;
+    border-left: 8px solid var(--lcars-orange) !important;
+    border-radius: 6px !important;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8) !important;
+}
+
+.material-tooltip .tooltip-content {
+    color: #ffffff !important;
+    font-family: 'Antonio', sans-serif !important;
+    font-weight: bold !important;
+    text-transform: uppercase !important;
+    font-size: 0.95rem !important;
+    letter-spacing: 0.5px !important;
+    padding: 6px 12px !important;
+}
+
+span.tooltipped {
+    border-bottom: 1px dotted var(--lcars-blue) !important;
+    cursor: help !important;
 }

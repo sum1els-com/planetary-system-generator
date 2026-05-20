@@ -16,13 +16,13 @@
     <tbody>
     {{#each this}}
         <tr>
-            <td>{{name}}</td>
+            <td><a class="object-link" data-name="{{name}}">{{name}}</a></td>
             <td>{{className}}, {{classification}}</td>
-            <td>{{formatNumber gravity}} g</td>
-            <td>{{formatNumber dayLength}} hours</td>
-            <td>{{atmosphere.name}}, {{atmosphere.density}} D<sub>⊕</sub></td>
+            <td>{{formatNumber gravity}} <span class="tooltipped" data-position="right" data-tooltip="Standard Gravity">g</span></td>
+            <td>{{formatNumber dayLength}} <span class="tooltipped" data-position="right" data-tooltip="Hours">hours</span></td>
+            <td>{{atmosphere.name}}, {{atmosphere.density}} <span class="tooltipped" data-position="right" data-tooltip="Earth Atmospheric Density">D<sub>⊕</sub></span></td>
             <td>{{weather}}</td>
-            <td>{{#if temperature.name}}{{temperature.name}}, {{/if}}{{formatNumber temperature.celsius}}&deg;C / {{formatNumber temperature.fahrenheit}}&deg;F</td>
+            <td>{{#if temperature.name}}{{temperature.name}}, {{/if}}{{formatNumber temperature.celsius}}<span class="tooltipped" data-position="right" data-tooltip="Degrees Celsius">&deg;C</span> / {{formatNumber temperature.fahrenheit}}<span class="tooltipped" data-position="right" data-tooltip="Degrees Fahrenheit">&deg;F</span></td>
             <td>{{tectonicActivity}}</td>
             <td>{{density.name}}</td>
         </tr>

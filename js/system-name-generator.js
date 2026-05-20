@@ -1,120 +1,125 @@
+import resultHelper from './result-helper.js';
+import rollHelper from './roll-helper.js';
+import tableHelper from './table-helper.js';
+
 /*
  * Template Table and Functions
  */
 
-window.systemName = (function () {
-    var localChance = new Chance(new Date());
+let localChance = new Chance(new Date());
 
-    var prefixTableParameters = {
-        code: "generator.starName.type.prefix"
-    };
+let prefixTableParameters = {
+    code: "generator.starName.type.prefix"
+};
 
-    var suffixTableParameters = {
-        code: "generator.starName.type.suffix"
-    };
+let suffixTableParameters = {
+    code: "generator.starName.type.suffix"
+};
 
-    var settings = {
-        dice: {
-            rollFunction: localChance.d6,
-            iterations: 3,
-            maxRoll: 19,
-            minRoll: 3
-        }
-    };
-
-    var prefixTable = null;
-    var suffixTable = null;
-
-    var prefixTablePromise = null;
-    var suffixTablePromise = null;
-
-    // Generate Table
-    function generatePrefixTable() {
-        if(prefixTable == null) {
-            prefixTablePromise = tableHelper.getTable("./data/system-name/system-name-prefix.json", {});
-            modifiersPromise = tableHelper.getModifiers("./data/system-name/system-name-prefix-modifiers.json");
-
-            prefixTable = prefixTablePromise.then(function (data) {
-                return data;
-            });
-
-            prefixTable = getPrefixTable();
-        }
-
-        return prefixTablePromise;
+let settings = {
+    dice: {
+        rollFunction: localChance.d6,
+        iterations: 3,
+        maxRoll: 19,
+        minRoll: 3
     }
+};
 
-    function generateSuffixTable() {
-        if(suffixTable == null) {
-            suffixTablePromise = tableHelper.getTable("./data/system-name/system-name-suffix.json", {});
-            modifiersPromise = tableHelper.getModifiers("./data/system-name/system-name-suffix-modifiers.json");
+let prefixTable = null;
+let suffixTable = null;
 
-            suffixTable = suffixTablePromise.then(function (data) {
-                return data;
-            });
+let prefixTablePromise = null;
+let suffixTablePromise = null;
+let modifiersPromise = null;
 
-            suffixTable = getSuffixTable();
-        }
+// Generate Table
+function generatePrefixTable() {
+    if(prefixTable == null) {
+        prefixTablePromise = tableHelper.getTable("./data/system-name/system-name-prefix.json", {});
+        modifiersPromise = tableHelper.getModifiers("./data/system-name/system-name-prefix-modifiers.json");
 
-        return suffixTablePromise;
-    }
-
-    function getPrefixTable() {
-        prefixTablePromise.done(function(data){
-            systemName.prefixTable = data;
+        prefixTable = prefixTablePromise.then(function (data) {
+            return data;
         });
 
-        return systemName.prefixTable;
+        prefixTable = getPrefixTable();
     }
 
-    function getSuffixTable() {
-        suffixTablePromise.done(function(data){
-            systemName.suffixTable = data;
+    return prefixTablePromise;
+}
+
+function generateSuffixTable() {
+    if(suffixTable == null) {
+        suffixTablePromise = tableHelper.getTable("./data/system-name/system-name-suffix.json", {});
+        modifiersPromise = tableHelper.getModifiers("./data/system-name/system-name-suffix-modifiers.json");
+
+        suffixTable = suffixTablePromise.then(function (data) {
+            return data;
         });
 
-        return systemName.suffixTable;
+        suffixTable = getSuffixTable();
     }
 
-    // Roll on Table 3d6
-    function roll() {
-        return rollFn(getPrefixTable(), getSuffixTable());
-    }
+    return suffixTablePromise;
+}
 
-    function rollFn(prefixSource, suffixSource) {
-        var prefixRoll = rollHelper.rollTable(prefixSource);
-        var suffixRoll = rollHelper.rollTable(suffixSource);
+function getPrefixTable() {
+    prefixTablePromise.done(function(data){
+        systemName.prefixTable = data;
+    });
 
-        var prefixResult = resultHelper.getFromTable(prefixSource, prefixRoll);
-        var suffixResult = resultHelper.getFromTable(suffixSource, suffixRoll);
+    return systemName.prefixTable;
+}
 
-        // Format Output
-        var output = {
-            systemName: {
-                name: prefixResult.name + suffixResult.name,
-                prefix: resultHelper.clone(prefixResult),
-                suffix: resultHelper.clone(suffixResult),
-            },
-            rolls: {
-                systemNamePrefix: prefixRoll,
-                systemNameSuffix: suffixRoll
-            }
-        };
+function getSuffixTable() {
+    suffixTablePromise.done(function(data){
+        systemName.suffixTable = data;
+    });
 
-        // Cleanup
-        // delete output.systemName.roll;
+    return systemName.suffixTable;
+}
 
-        return output;
-    }
+// Roll on Table 3d6
+function roll() {
+    return rollFn(getPrefixTable(), getSuffixTable());
+}
 
-    // Return Methods and Values
-    return {
-        settings: settings,
-        prefixTable: prefixTable,
-        suffixTable: suffixTable,
-        generatePrefixTable: generatePrefixTable,
-        generateSuffixTable: generateSuffixTable,
-        getPrefixTable: getPrefixTable,
-        getSuffixTable: getSuffixTable,
-        roll: roll
+function rollFn(prefixSource, suffixSource) {
+    let prefixRoll = rollHelper.rollTable(prefixSource);
+    let suffixRoll = rollHelper.rollTable(suffixSource);
+
+    let prefixResult = resultHelper.getFromTable(prefixSource, prefixRoll);
+    let suffixResult = resultHelper.getFromTable(suffixSource, suffixRoll);
+
+    // Format Output
+    let output = {
+        systemName: {
+            name: prefixResult.name + suffixResult.name,
+            prefix: resultHelper.clone(prefixResult),
+            suffix: resultHelper.clone(suffixResult),
+        },
+        rolls: {
+            systemNamePrefix: prefixRoll,
+            systemNameSuffix: suffixRoll
+        }
     };
-})();
+
+    // Cleanup
+    // delete output.systemName.roll;
+
+    return output;
+}
+
+// Return Methods and Values
+const systemName = {
+    settings: settings,
+    prefixTable: prefixTable,
+    suffixTable: suffixTable,
+    generatePrefixTable: generatePrefixTable,
+    generateSuffixTable: generateSuffixTable,
+    getPrefixTable: getPrefixTable,
+    getSuffixTable: getSuffixTable,
+    roll: roll
+};
+
+export default systemName;

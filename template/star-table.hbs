@@ -14,13 +14,13 @@
         {{#each stars}}
         <tr>
             <input type="hidden" name="id" value="{{@index}}" />
-            <td>{{name}}</td>
+            <td><a class="object-link" data-name="{{name}}">{{name}}</a></td>
             <td>{{class.name}}</td>
             <td>{{typeInfo.lc_class}}: {{typeInfo.lc_desc}}</td>
-            <td>{{formatNumber surfaceTemperature}} K</td>
-            <td>{{formatNumber luminosity}} L<sub>⊙</sub></td>
-            <td>{{formatNumber mass}} M<sub>⊙</sub></td>
-            <td>{{formatNumber radius}} R<sub>⊙</sub></td>
+            <td>{{formatNumber surfaceTemperature}} <span class="tooltipped" data-position="right" data-tooltip="Kelvin">K</span></td>
+            <td>{{formatNumber luminosity}} <span class="tooltipped" data-position="right" data-tooltip="Solar Luminosity">L<sub>⊙</sub></span></td>
+            <td>{{formatNumber mass}} <span class="tooltipped" data-position="right" data-tooltip="Solar Mass">M<sub>⊙</sub></span></td>
+            <td>{{formatNumber radius}} <span class="tooltipped" data-position="right" data-tooltip="Solar Radius">R<sub>⊙</sub></span></td>
         </tr>
         {{/each}}
     </tbody>

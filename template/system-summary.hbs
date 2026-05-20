@@ -19,7 +19,7 @@
     <div class="col s1">{{stats.planetCount}}</div>
     <div class="col s7">
         {{#each stats.planets}}
-        <div class="chip tooltipped{{#if class}} {{class}} lighten-3{{/if}}" data-position="bottom" data-tooltip="{{desc}}">{{name}} | {{total}}</span></div>
+        <div class="chip tooltipped{{#if class}} chip-{{class}}{{else}} chip-default{{/if}}" data-code="{{code}}" data-type="planet" data-position="bottom" data-tooltip="{{desc}}">{{name}} | {{total}}</div>
         {{/each}}
     </div>
 </div>
@@ -29,7 +29,7 @@
     <div class="col s1">{{stats.moonCount}}</div>
     <div class="col s7">
         {{#each stats.moons}}
-        <div class="chip tooltipped{{#if class}} {{class}} lighten-3{{/if}}" data-position="bottom" data-tooltip="{{desc}}">{{name}} | {{total}}</div>
+        <div class="chip tooltipped{{#if class}} chip-{{class}}{{else}} chip-default{{/if}}" data-code="{{code}}" data-type="moon" data-position="bottom" data-tooltip="{{desc}}">{{name}} | {{total}}</div>
         {{/each}}
     </div>
 </div>

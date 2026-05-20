@@ -19,10 +19,10 @@
             <input type="hidden" name="parentType" value="{{parentType}}" />
             <input type="hidden" name="parentId" value="{{@../index}}" />
             <input type="hidden" name="planetId" value="{{@index}}" />
-            <td>{{name}}</td>
+            <td><a class="object-link" data-name="{{name}}">{{name}}</a></td>
             <td class="{{replace zone "black" "grey"}} lighten-2 bold">{{zone}}</td>
             <td>{{#if className}}{{className}}, {{/if}}{{classification}}</td>
-            <td>{{distance}} au</td>
+            <td>{{distance}} <span class="tooltipped" data-position="right" data-tooltip="Astronomical Units">au</span></td>
             <td>{{satelliteCount}}</td>
         </tr>
         {{/each}}
@@ -33,10 +33,10 @@
             <input type="hidden" name="parentType" value="{{parentType}}" />
             <input type="hidden" name="parentId" value="{{@../index}}" />
             <input type="hidden" name="planetId" value="{{@index}}" />
-            <td>{{name}}</td>
+            <td><a class="object-link" data-name="{{name}}">{{name}}</a></td>
             <td class="{{replace zone "black" "grey"}} lighten-2 bold">{{zone}}</td>
             <td>{{#if className}}{{className}}, {{/if}}{{classification}}</td>
-            <td>{{distance}} au</td>
+            <td>{{distance}} <span class="tooltipped" data-position="right" data-tooltip="Astronomical Units">au</span></td>
             <td>{{satelliteCount}}</td>
         </tr>
         {{/each}}

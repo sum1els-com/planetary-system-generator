@@ -15,12 +15,12 @@
         {{#each starGroup}}
         {{#each stars}}
         <tr>
-            <td>{{../name}}</td>
-            <td>{{name}}</td>
-            <td>{{formatNumber ../luminosity}} L<sub>☉</sub></td>
-            <td>{{formatNumber ../mass}} M<sub>☉</sub></td>
-            <td>{{formatNumber orbitalSeparation.distance}} au</td>
-            <td>{{formatNumber ../stellarSeparation}} au</td>
+            <td><a class="object-link" data-name="{{../name}}">{{../name}}</a></td>
+            <td><a class="object-link" data-name="{{name}}">{{name}}</a></td>
+            <td>{{formatNumber ../luminosity}} <span class="tooltipped" data-position="right" data-tooltip="Solar Luminosity">L<sub>☉</sub></span></td>
+            <td>{{formatNumber ../mass}} <span class="tooltipped" data-position="right" data-tooltip="Solar Mass">M<sub>☉</sub></span></td>
+            <td>{{formatNumber orbitalSeparation.distance}} <span class="tooltipped" data-position="right" data-tooltip="Astronomical Units">au</span></td>
+            <td>{{formatNumber ../stellarSeparation}} <span class="tooltipped" data-position="right" data-tooltip="Astronomical Units">au</span></td>
         </tr>
         {{/each}}
         {{/each}}
